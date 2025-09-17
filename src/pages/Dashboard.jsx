@@ -17,7 +17,7 @@ export default function Dashboard() {
       navigate("/login");
     }
   }, [user, navigate]);
-
+  
   return (
     <div className="p-8">
       <h2 className="text-2xl font-semibold mb-4">Dashboard</h2>

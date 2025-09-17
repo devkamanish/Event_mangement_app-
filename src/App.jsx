@@ -13,13 +13,12 @@ import { useSelector } from "react-redux";
 
  function App() {
   const { user, loading } = useSelector((state) => state.auth);
-  
+
   return (
     <>
       <div>
         
       <Routes>
-        {/* default route → if user logged in go to dashboard, else login */}
         <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -29,6 +28,7 @@ import { useSelector } from "react-redux";
       </div>
     </>
   );
+  
 }
 
 export default App;

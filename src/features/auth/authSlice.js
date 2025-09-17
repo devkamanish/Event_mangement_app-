@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { registerUser, loginUser, logoutUser } from "./AuthService";
+import { registerUser, loginUser, logoutUser , loginWithGoogle} from "./AuthService";
 
 const initialState = {
   user: null,
@@ -33,6 +33,14 @@ export const signout = createAsyncThunk("auth/signout", async (_, thunkAPI) => {
   }
 });
 
+export const googleSignin = createAsyncThunk("auth/googleSignin", async (_, thunkAPI) => {
+  try {
+    return await loginWithGoogle();
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});
+
 // Slice
 const authSlice = createSlice({
   name: "auth",
@@ -51,6 +59,10 @@ const authSlice = createSlice({
       .addCase(signout.fulfilled, (state) => {
         state.user = null;
         state.status = "idle";
+      })
+      .addCase(googleSignin.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.status = "succeeded";
       })
       .addMatcher((action) => action.type.endsWith("/pending"), (state) => {
         state.status = "loading";
