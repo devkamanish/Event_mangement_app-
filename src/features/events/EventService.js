@@ -1,0 +1,21 @@
+// src/features/events/EventService.js
+import { db } from "../../firebase/firebaseconfig";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+
+// Add new registration
+export const registerForEvent = async (formData) => {
+  try {
+    const docRef = await addDoc(collection(db, "registrations"), formData);
+    console.log("✅ Registration saved:", docRef.id);
+    return { id: docRef.id, ...formData };
+  } catch (err) {
+    console.error("❌ Firestore error:", err);
+    throw err;
+  }
+};
+
+// Get all registrations
+export const fetchRegistrations = async () => {
+  const querySnapshot = await getDocs(collection(db, "registrations"));
+  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+};

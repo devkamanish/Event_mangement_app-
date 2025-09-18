@@ -1,23 +1,27 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
+
+// Firebase config from environment variables (Vite uses import.meta.env)
 const firebaseConfig = {
-  apiKey: "AIzaSyCyrlB8lRYHOho0H2wypZ5LhMkqBpt703c",
-  authDomain: "project-tracker-e0bb6.firebaseapp.com",
-  databaseURL: "https://project-tracker-e0bb6-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "project-tracker-e0bb6",
-  storageBucket: "project-tracker-e0bb6.firebasestorage.app",
-  messagingSenderId: "625952780024",
-  appId: "1:625952780024:web:a4a6581153c64ff65dd50d"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);  
+
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 export default app;
+
+
+
