@@ -1,7 +1,7 @@
 // src/pages/Login.jsx
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signin, googleSignin } from "../features/auth/authSlice";  // ⬅️ use the thunk
+import { signin} from "../features/auth/authSlice";  // ⬅️ use the thunk
 import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {

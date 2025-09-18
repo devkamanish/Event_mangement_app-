@@ -1,4 +1,3 @@
-// src/features/networking/networkingSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase/firebaseconfig";
@@ -9,14 +8,12 @@ const initialState = {
   error: null,
 };
 
-// Fetch chat messages
 export const fetchMessages = createAsyncThunk("networking/fetch", async () => {
   const q = query(collection(db, "networking"), orderBy("timestamp", "asc"));
   const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 });
 
-// Send a new message
 export const sendMessage = createAsyncThunk("networking/send", async (msg) => {
   const docRef = await addDoc(collection(db, "networking"), {
     ...msg,
@@ -49,3 +46,6 @@ const networkingSlice = createSlice({
 });
 
 export default networkingSlice.reducer;
+
+
+

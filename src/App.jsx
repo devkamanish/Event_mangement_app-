@@ -18,6 +18,14 @@ import Networking from "./pages/Networking";
 import FeedbackForm from "./pages/FeedbackForm";
 import AdminFeedback from "./pages/AdminFeedback";
 import Analytics from "./pages/Analytics";
+import Breakouts from "./pages/Breakouts";
+import AdminBreakouts from "./pages/AdminBreakouts";
+import BreakoutRoom from "./pages/BreakoutRoom";
+import AdminRoute from "./components/AdminRoute";
+import AddRecording from "./pages/AddRecording";
+import RecordingsLibrary from "./pages/RecordingsLibrary";
+import Polls from "./pages/Polls";
+import Engagement from "./pages/Engagement";
 
 function App() {
   const { user, loading } = useSelector((state) => state.auth);
@@ -41,14 +49,37 @@ function App() {
           <Route path="/event/register" element={<RegisterEvent />} />
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/admin/announcements" element={<AdminAnnouncements />} />
-          <Route path="/schedule" element={<Schedule />} />
+          <Route
+            path="/schedule"
+            element={
+              
+                <Schedule />
+              
+            }
+          />
+         
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/admin/speakers" element={<AdminSpeakers />} />
           <Route path="/networking" element={<Networking />} />
           <Route path="/feedback" element={<FeedbackForm />} />
           <Route path="/admin/feedback" element={<AdminFeedback />} />
-          <Route path="/analytics" element={<Analytics />} />
-          
+          <Route
+            path="/analytics"
+            element={
+              <AdminRoute>
+                <Analytics />
+              </AdminRoute>
+            }
+          />
+          <Route path="/breakouts" element={<Breakouts />} />
+          <Route path="/admin/breakouts" element={<AdminBreakouts />} />
+          <Route path="/breakouts/:id" element={<BreakoutRoom />} />
+          <Route path="/recordings" element={<RecordingsLibrary />} />
+            <Route path="/add-recording" element={<AddRecording />} />
+            <Route path="/polls" element={<Polls />} />
+            <Route path="/engagement" element={<Engagement />} />
+
+
         </Routes>
       </div>
     </>

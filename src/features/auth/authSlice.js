@@ -1,75 +1,76 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { registerUser, loginUser, logoutUser , loginWithGoogle} from "./AuthService";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase/firebaseconfig";
 
-const initialState = {
-  user: null,
-  status: "idle",
-  error: null,
-};
-
-// Async thunks
-export const signup = createAsyncThunk("auth/signup", async (formData, thunkAPI) => {
-  try {
-    return await registerUser(formData);
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+// 🔹 Register new user
+export const registerUser = createAsyncThunk(
+  "auth/registerUser",
+  async ({ email, password, role = "attendee" }) => {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db, "users", res.user.uid), {
+      uid: res.user.uid,
+      email,
+      role,
+    });
+    return { uid: res.user.uid, email, role };
   }
+);
+
+// 🔹 Login user
+export const signin = createAsyncThunk(
+  "auth/loginUser",
+  async ({ email, password }) => {
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    const snap = await getDoc(doc(db, "users", res.user.uid));
+    const userData = snap.data();
+    return { uid: res.user.uid, email: res.user.email, role: userData?.role };
+  }
+);
+
+// 🔹 Google OAuth login
+export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
+  const provider = new GoogleAuthProvider();
+  const res = await signInWithPopup(auth, provider);
+
+  const snap = await getDoc(doc(db, "users", res.user.uid));
+  if (!snap.exists()) {
+    await setDoc(doc(db, "users", res.user.uid), {
+      uid: res.user.uid,
+      email: res.user.email,
+      role: "attendee", // default role
+    });
+  }
+  return { uid: res.user.uid, email: res.user.email, role: "attendee" };
 });
 
-export const signin = createAsyncThunk("auth/signin", async (formData, thunkAPI) => {
-  try {
-    return await loginUser(formData);
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
-  }
+export const signout = createAsyncThunk("auth/signout", async () => {
+  await signOut(auth);
 });
 
-export const signout = createAsyncThunk("auth/signout", async (_, thunkAPI) => {
-  try {
-    await logoutUser();
-    return null;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
-  }
-});
-
-export const googleSignin = createAsyncThunk("auth/googleSignin", async (_, thunkAPI) => {
-  try {
-    return await loginWithGoogle();
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
-  }
-});
-
-// Slice
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: { user: null, status: "idle" },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signup.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.status = "succeeded";
       })
       .addCase(signin.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.status = "succeeded";
+      })
+      .addCase(googleLogin.fulfilled, (state, action) => {
+        state.user = action.payload;
       })
       .addCase(signout.fulfilled, (state) => {
         state.user = null;
-        state.status = "idle";
-      })
-      .addCase(googleSignin.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.status = "succeeded";
-      })
-      .addMatcher((action) => action.type.endsWith("/pending"), (state) => {
-        state.status = "loading";
-      })
-      .addMatcher((action) => action.type.endsWith("/rejected"), (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
       });
   },
 });

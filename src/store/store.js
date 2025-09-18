@@ -7,6 +7,9 @@ import speakersReducer  from "../features/speakers/speakersSlice"
 import networkingReducer  from "../features/networking/networkingSlice"
 import feedbackReducer  from "../features/feedback/feedbackSlice"
 import eventsReducer  from "../features/events/eventsSlice"
+import breakoutReducer  from "../features/breakouts/breakoutSlice"
+import chatReducer  from "../features/breakouts/chatSlice"
+
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -17,6 +20,10 @@ const rootReducer = combineReducers({
   networking :networkingReducer, 
   feedback: feedbackReducer,
   events: eventsReducer,
+  breakouts : breakoutReducer,
+  chat  : chatReducer,
+  
+  
 });
 
 const store = configureStore({

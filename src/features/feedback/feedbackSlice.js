@@ -1,28 +1,35 @@
-
+// src/features/feedback/feedbackSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebaseconfig";
 
 const initialState = {
-  list: [],
+  feedbacks: [],
   status: "idle",
   error: null,
 };
 
-export const fetchFeedback = createAsyncThunk("feedback/fetch", async () => {
-  const snapshot = await getDocs(collection(db, "feedback"));
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-});
+// Submit feedback
+export const submitFeedback = createAsyncThunk(
+  "feedback/submitFeedback",
+  async ({ sessionId, rating, comment, user }) => {
+    await addDoc(collection(db, `sessions/${sessionId}/feedback`), {
+      rating,
+      comment,
+      user,
+      createdAt: new Date(),
+    });
+  }
+);
 
-
-export const submitFeedback = createAsyncThunk("feedback/add", async (feedbackData) => {
-  const docRef = await addDoc(collection(db, "feedback"), {
-    ...feedbackData,
-    createdAt: new Date(),
-  });
-  return { id: docRef.id, ...feedbackData };
-});
-
+// Fetch feedback for a session
+export const fetchFeedback = createAsyncThunk(
+  "feedback/fetchFeedback",
+  async (sessionId) => {
+    const snap = await getDocs(collection(db, `sessions/${sessionId}/feedback`));
+    return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+);
 
 const feedbackSlice = createSlice({
   name: "feedback",
@@ -35,10 +42,7 @@ const feedbackSlice = createSlice({
       })
       .addCase(fetchFeedback.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.list = action.payload;
-      })
-      .addCase(submitFeedback.fulfilled, (state, action) => {
-        state.list.push(action.payload);
+        state.feedbacks = action.payload;
       })
       .addCase(fetchFeedback.rejected, (state, action) => {
         state.status = "failed";

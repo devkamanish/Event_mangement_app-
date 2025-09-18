@@ -1,53 +1,100 @@
 // src/pages/AdminSpeakers.jsx
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addSpeaker } from "../features/speakers/speakersSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchSpeakers,
+  addSpeaker,
+  updateSpeaker,
+  deleteSpeaker,
+} from "../features/speakers/speakersSlice";
 
-const AdminSpeakers = () => {
+export default function AdminSpeakers() {
   const dispatch = useDispatch();
-  const [form, setForm] = useState({ name: "", bio: "", topic: "" });
+  const { speakers, status } = useSelector((state) => state.speakers);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const [form, setForm] = useState({ name: "", bio: "", topic: "" });
+  const [editId, setEditId] = useState(null);
+
+  useEffect(() => {
+    dispatch(fetchSpeakers());
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addSpeaker(form));
+    if (editId) {
+      dispatch(updateSpeaker({ id: editId, ...form }));
+      setEditId(null);
+    } else {
+      dispatch(addSpeaker(form));
+    }
     setForm({ name: "", bio: "", topic: "" });
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-xl font-bold mb-4">Add New Speaker</h2>
-      <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+    <div className="p-6">
+      <h2 className="text-2xl font-semibold mb-4">Manage Speakers</h2>
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="mb-6 bg-white p-4 rounded shadow">
         <input
           type="text"
-          name="name"
-          placeholder="Speaker Name"
+          placeholder="Name"
+          className="border p-2 mr-2"
           value={form.name}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-        <textarea
-          name="bio"
-          placeholder="Bio"
-          value={form.bio}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
         <input
           type="text"
-          name="topic"
-          placeholder="Session Topic"
+          placeholder="Topic"
+          className="border p-2 mr-2"
           value={form.topic}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
+          onChange={(e) => setForm({ ...form, topic: e.target.value })}
         />
-        <button className="bg-blue-600 text-white px-4 py-2 rounded">Add Speaker</button>
+        <input
+          type="text"
+          placeholder="Bio"
+          className="border p-2 mr-2"
+          value={form.bio}
+          onChange={(e) => setForm({ ...form, bio: e.target.value })}
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          {editId ? "Update" : "Add"}
+        </button>
       </form>
+
+      {/* List */}
+      {status === "loading" && <p>Loading...</p>}
+      {speakers.map((sp) => (
+        <div
+          key={sp.id}
+          className="flex justify-between items-center bg-gray-100 p-3 mb-2 rounded"
+        >
+          <div>
+            <h3 className="font-bold">{sp.name}</h3>
+            <p className="text-sm">{sp.topic}</p>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                setForm({ name: sp.name, bio: sp.bio, topic: sp.topic });
+                setEditId(sp.id);
+              }}
+              className="bg-yellow-500 text-white px-3 py-1 mr-2 rounded"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => dispatch(deleteSpeaker(sp.id))}
+              className="bg-red-500 text-white px-3 py-1 rounded"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
   );
-};
-
-export default AdminSpeakers;
+}
