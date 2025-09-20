@@ -34,6 +34,7 @@ export async function loginUser({ email, password }) {
   return userCredential.user;
 }
 
+
 // Logout user
 export async function logoutUser() {
   await signOut(auth);
