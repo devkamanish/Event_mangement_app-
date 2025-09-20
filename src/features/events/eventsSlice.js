@@ -8,7 +8,7 @@ const dummyEvents = [
 ];
 
 const initialState = {
-  list: [],
+  events: [],
   status: "idle",
   error: null,
 };

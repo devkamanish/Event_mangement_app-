@@ -54,25 +54,45 @@ export const signout = createAsyncThunk("auth/signout", async () => {
   await signOut(auth);
 });
 
+
 const authSlice = createSlice({
   name: "auth",
-  initialState: { user: null, status: "idle" },
+  initialState: { user: null, status: "idle", error: null },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.status = "succeeded";
+        state.error = null;
       })
       .addCase(signin.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.status = "succeeded";
+        state.error = null;
       })
       .addCase(googleLogin.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.status = "succeeded";
+        state.error = null;
       })
       .addCase(signout.fulfilled, (state) => {
         state.user = null;
+        state.status = "idle";
+        state.error = null;
+      })
+      // 🔹 Handle pending
+      .addMatcher((action) => action.type.endsWith("/pending"), (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      // 🔹 Handle rejected
+      .addMatcher((action) => action.type.endsWith("/rejected"), (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "Something went wrong";
       });
   },
 });
+
 
 export default authSlice.reducer;

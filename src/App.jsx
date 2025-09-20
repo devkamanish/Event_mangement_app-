@@ -49,37 +49,21 @@ function App() {
           <Route path="/event/register" element={<RegisterEvent />} />
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/admin/announcements" element={<AdminAnnouncements />} />
-          <Route
-            path="/schedule"
-            element={
-              
-                <Schedule />
-              
-            }
-          />
-         
+          <Route path="/schedule" element={<Schedule />} />
+
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/admin/speakers" element={<AdminSpeakers />} />
           <Route path="/networking" element={<Networking />} />
           <Route path="/feedback" element={<FeedbackForm />} />
           <Route path="/admin/feedback" element={<AdminFeedback />} />
-          <Route
-            path="/analytics"
-            element={
-              <AdminRoute>
-                <Analytics />
-              </AdminRoute>
-            }
-          />
+          <Route path="/analytics" element={<Analytics />} />
           <Route path="/breakouts" element={<Breakouts />} />
           <Route path="/admin/breakouts" element={<AdminBreakouts />} />
           <Route path="/breakouts/:id" element={<BreakoutRoom />} />
           <Route path="/recordings" element={<RecordingsLibrary />} />
-            <Route path="/add-recording" element={<AddRecording />} />
-            <Route path="/polls" element={<Polls />} />
-            <Route path="/engagement" element={<Engagement />} />
-
-
+          <Route path="/add-recording" element={<AddRecording />} />
+          <Route path="/polls" element={<Polls />} />
+          <Route path="/engagement" element={<Engagement />} />
         </Routes>
       </div>
     </>
