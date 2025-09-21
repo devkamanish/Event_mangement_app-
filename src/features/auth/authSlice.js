@@ -7,7 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase/firebaseconfig";
+import { auth, db } from "../../firebase/firebaseConfig";
 
 // 🔹 Register new user
 export const registerUser = createAsyncThunk(
