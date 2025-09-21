@@ -1,5 +1,5 @@
 // src/features/events/EventService.js
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
 // Add new registration

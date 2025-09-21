@@ -1,15 +1,13 @@
 // src/pages/Register.jsx
 import { useState } from "react";
-import { auth } from "../firebase/firebaseconfig";
+import { auth } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import SplitText from "../styles/SplitText ";
 
 const handleAnimationComplete = () => {
-  console.log('All letters have animated!');
+  console.log("All letters have animated!");
 };
-
-
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -35,24 +33,25 @@ const Register = () => {
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-900 text-white">
-  
-      <form onSubmit={handleRegister} className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
+      <form
+        onSubmit={handleRegister}
+        className="bg-gray-800 p-8 rounded-xl shadow-lg w-96"
+      >
         {/* <h2 className="text-2xl mb-4 font-bold">Register</h2> */}
-                  <SplitText
-  text="Hello, Please Register"
-  className="text-2xl font-semibold text-center mb-2"
-  delay={100}
-  duration={0.6}
-  ease="power3.out"
-  splitType="chars"
-  from={{ opacity: 0, y: 40 }}
-  to={{ opacity: 1, y: 0 }}
-  threshold={0.1}
-  rootMargin="-100px"
-  textAlign="center"
-  onLetterAnimationComplete={handleAnimationComplete}
-    
-/>
+        <SplitText
+          text="Hello, Please Register"
+          className="text-2xl font-semibold text-center mb-2"
+          delay={100}
+          duration={0.6}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="center"
+          onLetterAnimationComplete={handleAnimationComplete}
+        />
         {error && <p className="text-red-500">{error}</p>}
 
         <input
@@ -77,7 +76,10 @@ const Register = () => {
           {loading ? "Creating..." : "Register"}
         </button>
         <p className="mt-3 text-sm">
-          Already have an account? <Link to="/login" className="text-green-400">Login</Link>
+          Already have an account?{" "}
+          <Link to="/login" className="text-green-400">
+            Login
+          </Link>
         </p>
       </form>
     </div>

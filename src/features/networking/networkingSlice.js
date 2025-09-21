@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   messages: [],
@@ -46,6 +52,3 @@ const networkingSlice = createSlice({
 });
 
 export default networkingSlice.reducer;
-
-
-

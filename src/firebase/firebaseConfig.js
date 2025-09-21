@@ -3,7 +3,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-
 // Firebase config from environment variables (Vite uses import.meta.env)
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -22,6 +21,3 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 export default app;
-
-
-

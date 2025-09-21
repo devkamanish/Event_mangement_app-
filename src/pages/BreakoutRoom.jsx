@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { listenToMessages, sendMessage } from "../features/breakouts/chatSlice";
-import { auth } from "../firebase/firebaseconfig";
+import { auth } from "../firebase/firebaseConfig";
 
 const BreakoutRoom = () => {
-
   const { id } = useParams();
   const dispatch = useDispatch();
-const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const { messages } = useSelector((state) => state.chat);
   const [newMsg, setNewMsg] = useState("");
 

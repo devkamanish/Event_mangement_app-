@@ -1,7 +1,7 @@
 // src/features/recordings/recordingsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   recordings: [],

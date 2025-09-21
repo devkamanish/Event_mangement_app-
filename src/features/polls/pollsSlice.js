@@ -1,7 +1,13 @@
 // src/features/polls/pollsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   polls: [],
@@ -12,7 +18,10 @@ const initialState = {
 // Fetch Polls
 export const fetchPolls = createAsyncThunk("polls/fetchPolls", async () => {
   const snapshot = await getDocs(collection(db, "polls"));
-  return snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+  return snapshot.docs.map((docSnap) => ({
+    id: docSnap.id,
+    ...docSnap.data(),
+  }));
 });
 
 // Add Poll
@@ -52,7 +61,9 @@ const pollsSlice = createSlice({
         state.polls.push(action.payload);
       })
       .addCase(votePoll.fulfilled, (state, action) => {
-        const idx = state.polls.findIndex((p) => p.id === action.payload.pollId);
+        const idx = state.polls.findIndex(
+          (p) => p.id === action.payload.pollId
+        );
         if (idx !== -1) {
           state.polls[idx].votes = action.payload.votes;
         }

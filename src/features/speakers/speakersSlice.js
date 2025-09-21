@@ -7,7 +7,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   speakers: [],
@@ -20,7 +20,10 @@ export const fetchSpeakers = createAsyncThunk(
   "speakers/fetchSpeakers",
   async () => {
     const snapshot = await getDocs(collection(db, "speakers"));
-    return snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+    return snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
   }
 );
 
@@ -77,14 +80,18 @@ const speakersSlice = createSlice({
       })
       // Update
       .addCase(updateSpeaker.fulfilled, (state, action) => {
-        const idx = state.speakers.findIndex((sp) => sp.id === action.payload.id);
+        const idx = state.speakers.findIndex(
+          (sp) => sp.id === action.payload.id
+        );
         if (idx !== -1) {
           state.speakers[idx] = action.payload;
         }
       })
       // Delete
       .addCase(deleteSpeaker.fulfilled, (state, action) => {
-        state.speakers = state.speakers.filter((sp) => sp.id !== action.payload);
+        state.speakers = state.speakers.filter(
+          (sp) => sp.id !== action.payload
+        );
       });
   },
 });

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   surveys: [],
@@ -9,28 +9,43 @@ const initialState = {
 };
 
 // Add a survey
-export const addSurvey = createAsyncThunk("engagement/addSurvey", async (surveyData) => {
-  const docRef = await addDoc(collection(db, "surveys"), surveyData);
-  return { id: docRef.id, ...surveyData };
-});
+export const addSurvey = createAsyncThunk(
+  "engagement/addSurvey",
+  async (surveyData) => {
+    const docRef = await addDoc(collection(db, "surveys"), surveyData);
+    return { id: docRef.id, ...surveyData };
+  }
+);
 
 // Fetch surveys
-export const fetchSurveys = createAsyncThunk("engagement/fetchSurveys", async () => {
-  const snapshot = await getDocs(collection(db, "surveys"));
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-});
+export const fetchSurveys = createAsyncThunk(
+  "engagement/fetchSurveys",
+  async () => {
+    const snapshot = await getDocs(collection(db, "surveys"));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+);
 
 // Add exclusive content
-export const addContent = createAsyncThunk("engagement/addContent", async (contentData) => {
-  const docRef = await addDoc(collection(db, "exclusiveContent"), contentData);
-  return { id: docRef.id, ...contentData };
-});
+export const addContent = createAsyncThunk(
+  "engagement/addContent",
+  async (contentData) => {
+    const docRef = await addDoc(
+      collection(db, "exclusiveContent"),
+      contentData
+    );
+    return { id: docRef.id, ...contentData };
+  }
+);
 
 // Fetch exclusive content
-export const fetchContent = createAsyncThunk("engagement/fetchContent", async () => {
-  const snapshot = await getDocs(collection(db, "exclusiveContent"));
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-});
+export const fetchContent = createAsyncThunk(
+  "engagement/fetchContent",
+  async () => {
+    const snapshot = await getDocs(collection(db, "exclusiveContent"));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+);
 
 const engagementSlice = createSlice({
   name: "engagement",

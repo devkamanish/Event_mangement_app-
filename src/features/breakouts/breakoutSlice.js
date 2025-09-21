@@ -1,7 +1,6 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   sessions: [],
@@ -14,10 +13,13 @@ export const fetchBreakouts = createAsyncThunk("breakouts/fetch", async () => {
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 });
 
-export const addBreakout = createAsyncThunk("breakouts/add", async (session) => {
-  const docRef = await addDoc(collection(db, "breakouts"), session);
-  return { id: docRef.id, ...session };
-});
+export const addBreakout = createAsyncThunk(
+  "breakouts/add",
+  async (session) => {
+    const docRef = await addDoc(collection(db, "breakouts"), session);
+    return { id: docRef.id, ...session };
+  }
+);
 
 const breakoutSlice = createSlice({
   name: "breakouts",

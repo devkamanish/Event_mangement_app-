@@ -1,7 +1,12 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   messages: [],
@@ -11,7 +16,10 @@ const initialState = {
 
 // Realtime listener for messages
 export const listenToMessages = (sessionId) => (dispatch) => {
-  const q = query(collection(db, `breakouts/${sessionId}/messages`), orderBy("createdAt", "asc"));
+  const q = query(
+    collection(db, `breakouts/${sessionId}/messages`),
+    orderBy("createdAt", "asc")
+  );
   onSnapshot(q, (snapshot) => {
     const msgs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     dispatch(chatSlice.actions.setMessages(msgs));

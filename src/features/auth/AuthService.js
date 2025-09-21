@@ -1,5 +1,4 @@
-
-import {auth, db} from "../../firebase/firebaseconfig"
+import { auth, db } from "../../firebase/firebaseConfig";
 
 import {
   createUserWithEmailAndPassword,
@@ -12,7 +11,11 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 
 export async function registerUser({ name, email, password, ticket }) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
 
   // Update display name
   await updateProfile(userCredential.user, { displayName: name });
@@ -30,10 +33,13 @@ export async function registerUser({ name, email, password, ticket }) {
 
 // Login user
 export async function loginUser({ email, password }) {
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   return userCredential.user;
 }
-
 
 // Logout user
 export async function logoutUser() {

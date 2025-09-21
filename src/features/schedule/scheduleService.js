@@ -1,5 +1,11 @@
-import { db } from "../../firebase/firebaseconfig";
-import { collection, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
+import {
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 
 export const fetchSessions = async () => {
   const querySnapshot = await getDocs(collection(db, "sessions"));
@@ -12,4 +18,3 @@ export const bookmarkSession = async (userId, sessionId) => {
     bookmarks: arrayUnion(sessionId),
   });
 };
-

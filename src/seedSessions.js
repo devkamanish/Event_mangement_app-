@@ -1,5 +1,5 @@
 // src/seedSessions.js
-import { db } from "./firebase/firebaseconfig";
+import { db } from "./firebase/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 const sampleSessions = [

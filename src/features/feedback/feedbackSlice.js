@@ -1,16 +1,13 @@
 // src/features/feedback/feedbackSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 
 const initialState = {
   feedbacks: [],
   status: "idle",
   error: null,
 };
-
-
-
 
 // Submit feedback
 export const submitFeedback = createAsyncThunk(
@@ -29,7 +26,9 @@ export const submitFeedback = createAsyncThunk(
 export const fetchFeedback = createAsyncThunk(
   "feedback/fetchFeedback",
   async (sessionId) => {
-    const snap = await getDocs(collection(db, `sessions/${sessionId}/feedback`));
+    const snap = await getDocs(
+      collection(db, `sessions/${sessionId}/feedback`)
+    );
     return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 );

@@ -1,6 +1,6 @@
 // src/features/tickets/ticketsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { db } from "../../firebase/firebaseconfig";
+import { db } from "../../firebase/firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 
 const initialState = {
@@ -9,15 +9,21 @@ const initialState = {
   error: null,
 };
 
-export const fetchTickets = createAsyncThunk("tickets/fetchTickets", async () => {
-  const querySnapshot = await getDocs(collection(db, "tickets"));
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-});
+export const fetchTickets = createAsyncThunk(
+  "tickets/fetchTickets",
+  async () => {
+    const querySnapshot = await getDocs(collection(db, "tickets"));
+    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+);
 
-export const createTicket = createAsyncThunk("tickets/createTicket", async (ticketData) => {
-  const docRef = await addDoc(collection(db, "tickets"), ticketData);
-  return { id: docRef.id, ...ticketData };
-});
+export const createTicket = createAsyncThunk(
+  "tickets/createTicket",
+  async (ticketData) => {
+    const docRef = await addDoc(collection(db, "tickets"), ticketData);
+    return { id: docRef.id, ...ticketData };
+  }
+);
 
 const ticketsSlice = createSlice({
   name: "tickets",
