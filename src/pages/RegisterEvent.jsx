@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRegistration } from "../features/events/eventSlice";
@@ -24,11 +23,18 @@ const RegisterEvent = () => {
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-900 text-white">
-        {status === "loading" && <p className="text-yellow-400">⏳ Registering...</p>}
-{status === "succeeded" && <p className="text-green-400">✅ Registration successful!</p>}
-{status === "failed" && <p className="text-red-400">❌ {error}</p>}
+      {status === "loading" && (
+        <p className="text-yellow-400">⏳ Registering...</p>
+      )}
+      {status === "succeeded" && (
+        <p className="text-green-400">✅ Registration successful!</p>
+      )}
+      {status === "failed" && <p className="text-red-400">❌ {error}</p>}
 
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-800 p-8 rounded-xl shadow-lg w-96"
+      >
         <h2 className="text-2xl mb-4 font-bold">Event Registration</h2>
         {error && <p className="text-red-500">{error}</p>}
 
@@ -75,4 +81,3 @@ const RegisterEvent = () => {
 };
 
 export default RegisterEvent;
-

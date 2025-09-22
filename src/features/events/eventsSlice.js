@@ -1,4 +1,3 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const dummyEvents = [
@@ -16,7 +15,6 @@ const initialState = {
 export const fetchEvents = createAsyncThunk("events/fetch", async () => {
   return dummyEvents;
 });
-
 
 const eventsSlice = createSlice({
   name: "events",

@@ -9,7 +9,6 @@ import {
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase/firebaseConfig";
 
-// 🔹 Register new user
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password, role = "attendee" }) => {
@@ -23,7 +22,6 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// 🔹 Login user
 export const signin = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }) => {
@@ -44,7 +42,7 @@ export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
     await setDoc(doc(db, "users", res.user.uid), {
       uid: res.user.uid,
       email: res.user.email,
-      role: "attendee", // default role
+      role: "attendee",
     });
   }
   return { uid: res.user.uid, email: res.user.email, role: "attendee" };
@@ -53,7 +51,6 @@ export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
 export const signout = createAsyncThunk("auth/signout", async () => {
   await signOut(auth);
 });
-
 
 const authSlice = createSlice({
   name: "auth",
@@ -81,18 +78,21 @@ const authSlice = createSlice({
         state.status = "idle";
         state.error = null;
       })
-      // 🔹 Handle pending
-      .addMatcher((action) => action.type.endsWith("/pending"), (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      // 🔹 Handle rejected
-      .addMatcher((action) => action.type.endsWith("/rejected"), (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message || "Something went wrong";
-      });
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.status = "loading";
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.error.message || "Something went wrong";
+        }
+      );
   },
 });
-
 
 export default authSlice.reducer;

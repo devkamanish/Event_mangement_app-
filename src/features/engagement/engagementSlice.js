@@ -8,7 +8,6 @@ const initialState = {
   status: "idle",
 };
 
-// Add a survey
 export const addSurvey = createAsyncThunk(
   "engagement/addSurvey",
   async (surveyData) => {
@@ -17,7 +16,6 @@ export const addSurvey = createAsyncThunk(
   }
 );
 
-// Fetch surveys
 export const fetchSurveys = createAsyncThunk(
   "engagement/fetchSurveys",
   async () => {
@@ -26,7 +24,6 @@ export const fetchSurveys = createAsyncThunk(
   }
 );
 
-// Add exclusive content
 export const addContent = createAsyncThunk(
   "engagement/addContent",
   async (contentData) => {
@@ -38,7 +35,6 @@ export const addContent = createAsyncThunk(
   }
 );
 
-// Fetch exclusive content
 export const fetchContent = createAsyncThunk(
   "engagement/fetchContent",
   async () => {

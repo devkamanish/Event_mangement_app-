@@ -1,4 +1,3 @@
-// src/features/recordings/recordingsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
@@ -9,7 +8,6 @@ const initialState = {
   error: null,
 };
 
-// Add new recording (Admin only)
 export const addRecording = createAsyncThunk(
   "recordings/addRecording",
   async ({ title, description, videoUrl, sessionId }) => {
@@ -23,7 +21,6 @@ export const addRecording = createAsyncThunk(
   }
 );
 
-// Fetch all recordings
 export const fetchRecordings = createAsyncThunk(
   "recordings/fetchRecordings",
   async () => {

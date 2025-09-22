@@ -1,4 +1,3 @@
-// src/features/tickets/ticketsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { db } from "../../firebase/firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";

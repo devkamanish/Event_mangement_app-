@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBreakout } from "../features/breakouts/breakoutSlice";
@@ -44,7 +42,9 @@ const AdminBreakouts = () => {
           onChange={(e) => setTime(e.target.value)}
           className="w-full p-2 border rounded"
         />
-        <button className="bg-green-600 text-white px-4 py-2 rounded">Add</button>
+        <button className="bg-green-600 text-white px-4 py-2 rounded">
+          Add
+        </button>
       </form>
     </div>
   );

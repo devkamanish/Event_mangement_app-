@@ -1,4 +1,3 @@
-// src/pages/Polls.jsx
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPolls, addPoll, votePoll } from "../features/polls/pollsSlice";
@@ -52,9 +51,7 @@ export default function Polls() {
             {Object.keys(poll.options || { Yes: 0, No: 0 }).map((option) => (
               <button
                 key={option}
-                onClick={() =>
-                  dispatch(votePoll({ pollId: poll.id, option }))
-                }
+                onClick={() => dispatch(votePoll({ pollId: poll.id, option }))}
                 className="bg-green-500 text-white px-3 py-1 rounded"
               >
                 {option} ({poll.votes?.[option] || 0})

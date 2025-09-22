@@ -15,7 +15,6 @@ const initialState = {
   error: null,
 };
 
-// 🔹 Fetch Speakers
 export const fetchSpeakers = createAsyncThunk(
   "speakers/fetchSpeakers",
   async () => {
@@ -27,7 +26,6 @@ export const fetchSpeakers = createAsyncThunk(
   }
 );
 
-// 🔹 Add Speaker
 export const addSpeaker = createAsyncThunk(
   "speakers/addSpeaker",
   async (speakerData) => {
@@ -36,7 +34,6 @@ export const addSpeaker = createAsyncThunk(
   }
 );
 
-// 🔹 Update Speaker
 export const updateSpeaker = createAsyncThunk(
   "speakers/updateSpeaker",
   async ({ id, ...updates }) => {
@@ -46,7 +43,6 @@ export const updateSpeaker = createAsyncThunk(
   }
 );
 
-// 🔹 Delete Speaker
 export const deleteSpeaker = createAsyncThunk(
   "speakers/deleteSpeaker",
   async (id) => {
@@ -62,7 +58,7 @@ const speakersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Fetch
+
       .addCase(fetchSpeakers.pending, (state) => {
         state.status = "loading";
       })
@@ -74,11 +70,11 @@ const speakersSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      // Add
+
       .addCase(addSpeaker.fulfilled, (state, action) => {
         state.speakers.push(action.payload);
       })
-      // Update
+
       .addCase(updateSpeaker.fulfilled, (state, action) => {
         const idx = state.speakers.findIndex(
           (sp) => sp.id === action.payload.id
@@ -87,7 +83,7 @@ const speakersSlice = createSlice({
           state.speakers[idx] = action.payload;
         }
       })
-      // Delete
+
       .addCase(deleteSpeaker.fulfilled, (state, action) => {
         state.speakers = state.speakers.filter(
           (sp) => sp.id !== action.payload

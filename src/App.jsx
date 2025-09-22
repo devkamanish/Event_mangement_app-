@@ -50,7 +50,6 @@ function App() {
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/admin/announcements" element={<AdminAnnouncements />} />
           <Route path="/schedule" element={<Schedule />} />
-
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/admin/speakers" element={<AdminSpeakers />} />
           <Route path="/networking" element={<Networking />} />

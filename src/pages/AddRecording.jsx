@@ -1,4 +1,3 @@
-// src/pages/AddRecording.jsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addRecording } from "../features/recordings/recordingsSlice";

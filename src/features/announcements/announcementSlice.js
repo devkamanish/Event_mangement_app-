@@ -1,6 +1,8 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createAnnouncement, subscribeToAnnouncements } from "./announcementService";
+import {
+  createAnnouncement,
+  subscribeToAnnouncements,
+} from "./announcementService";
 
 const initialState = {
   list: [],
@@ -18,7 +20,6 @@ export const addAnnouncement = createAsyncThunk(
     }
   }
 );
-
 
 let unsubscribeFn = null;
 

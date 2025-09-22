@@ -1,4 +1,3 @@
-// src/pages/Register.jsx
 import { useState } from "react";
 import { auth } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -23,7 +22,7 @@ const Register = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard"); // ✅ redirect after register
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
     } finally {

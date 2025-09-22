@@ -1,4 +1,3 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchSessions, bookmarkSession } from "./scheduleService";
 
@@ -8,13 +7,16 @@ const initialState = {
   error: null,
 };
 
-export const loadSessions = createAsyncThunk("schedule/load", async (_, thunkAPI) => {
-  try {
-    return await fetchSessions();
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+export const loadSessions = createAsyncThunk(
+  "schedule/load",
+  async (_, thunkAPI) => {
+    try {
+      return await fetchSessions();
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
   }
-});
+);
 
 export const addBookmark = createAsyncThunk(
   "schedule/bookmark",
@@ -39,17 +41,22 @@ const scheduleSlice = createSlice({
         state.status = "succeeded";
       })
       .addCase(addBookmark.fulfilled, (state, action) => {
-        
         const session = state.sessions.find((s) => s.id === action.payload);
         if (session) session.bookmarked = true;
       })
-      .addMatcher((action) => action.type.endsWith("/pending"), (state) => {
-        state.status = "loading";
-      })
-      .addMatcher((action) => action.type.endsWith("/rejected"), (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
-      });
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.status = "loading";
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        }
+      );
   },
 });
 

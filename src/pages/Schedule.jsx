@@ -17,7 +17,8 @@ const Schedule = () => {
     dispatch(addBookmark({ userId: user.uid, sessionId }));
   };
 
-  if (status === "loading") return <p className="text-center mt-8">Loading sessions...</p>;
+  if (status === "loading")
+    return <p className="text-center mt-8">Loading sessions...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (

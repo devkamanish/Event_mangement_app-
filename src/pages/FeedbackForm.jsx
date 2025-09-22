@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { submitFeedback } from "../features/feedback/feedbackSlice";
@@ -47,7 +46,9 @@ const FeedbackForm = () => {
             className="ml-2 p-1 border rounded"
           >
             {[1, 2, 3, 4, 5].map((num) => (
-              <option key={num} value={num}>{num}</option>
+              <option key={num} value={num}>
+                {num}
+              </option>
             ))}
           </select>
         </label>
@@ -60,7 +61,10 @@ const FeedbackForm = () => {
           className="w-full p-2 border rounded"
         />
 
-        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-4 py-2 rounded"
+        >
           Submit Feedback
         </button>
       </form>

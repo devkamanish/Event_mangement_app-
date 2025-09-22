@@ -1,4 +1,3 @@
-// src/pages/AdminSpeakers.jsx
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -35,7 +34,10 @@ export default function AdminSpeakers() {
       <h2 className="text-2xl font-semibold mb-4">Manage Speakers</h2>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="mb-6 bg-white p-4 rounded shadow">
+      <form
+        onSubmit={handleSubmit}
+        className="mb-6 bg-white p-4 rounded shadow"
+      >
         <input
           type="text"
           placeholder="Name"

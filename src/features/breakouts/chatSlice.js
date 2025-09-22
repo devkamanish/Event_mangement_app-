@@ -14,7 +14,6 @@ const initialState = {
   error: null,
 };
 
-// Realtime listener for messages
 export const listenToMessages = (sessionId) => (dispatch) => {
   const q = query(
     collection(db, `breakouts/${sessionId}/messages`),
@@ -26,7 +25,6 @@ export const listenToMessages = (sessionId) => (dispatch) => {
   });
 };
 
-// Send a message
 export const sendMessage = createAsyncThunk(
   "chat/sendMessage",
   async ({ sessionId, text, user }) => {

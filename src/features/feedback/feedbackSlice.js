@@ -1,4 +1,3 @@
-// src/features/feedback/feedbackSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
@@ -9,7 +8,6 @@ const initialState = {
   error: null,
 };
 
-// Submit feedback
 export const submitFeedback = createAsyncThunk(
   "feedback/submitFeedback",
   async ({ sessionId, rating, comment, user }) => {
@@ -22,7 +20,6 @@ export const submitFeedback = createAsyncThunk(
   }
 );
 
-// Fetch feedback for a session
 export const fetchFeedback = createAsyncThunk(
   "feedback/fetchFeedback",
   async (sessionId) => {

@@ -1,4 +1,3 @@
-// src/features/polls/pollsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   collection,
@@ -15,7 +14,6 @@ const initialState = {
   error: null,
 };
 
-// Fetch Polls
 export const fetchPolls = createAsyncThunk("polls/fetchPolls", async () => {
   const snapshot = await getDocs(collection(db, "polls"));
   return snapshot.docs.map((docSnap) => ({
@@ -24,13 +22,11 @@ export const fetchPolls = createAsyncThunk("polls/fetchPolls", async () => {
   }));
 });
 
-// Add Poll
 export const addPoll = createAsyncThunk("polls/addPoll", async (pollData) => {
   const docRef = await addDoc(collection(db, "polls"), pollData);
   return { id: docRef.id, ...pollData };
 });
 
-// Vote Poll
 export const votePoll = createAsyncThunk(
   "polls/votePoll",
   async ({ pollId, option }) => {

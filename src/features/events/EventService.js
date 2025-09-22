@@ -1,8 +1,6 @@
-// src/features/events/EventService.js
 import { db } from "../../firebase/firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
-// Add new registration
 export const registerForEvent = async (formData) => {
   try {
     const docRef = await addDoc(collection(db, "registrations"), formData);
@@ -14,7 +12,6 @@ export const registerForEvent = async (formData) => {
   }
 };
 
-// Get all registrations
 export const fetchRegistrations = async () => {
   const querySnapshot = await getDocs(collection(db, "registrations"));
   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));

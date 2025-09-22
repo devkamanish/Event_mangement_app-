@@ -1,4 +1,3 @@
-// src/pages/AdminFeedback.jsx
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFeedback } from "../features/feedback/feedbackSlice";
@@ -23,9 +22,15 @@ const AdminFeedback = () => {
           {list.map((fb) => (
             <div key={fb.id} className="p-4 bg-white rounded shadow">
               <h3 className="font-semibold">Session: {fb.session}</h3>
-              <p><strong>User:</strong> {fb.user}</p>
-              <p><strong>Rating:</strong> {fb.rating} / 5</p>
-              <p><strong>Comments:</strong> {fb.comments}</p>
+              <p>
+                <strong>User:</strong> {fb.user}
+              </p>
+              <p>
+                <strong>Rating:</strong> {fb.rating} / 5
+              </p>
+              <p>
+                <strong>Comments:</strong> {fb.comments}
+              </p>
             </div>
           ))}
         </div>
@@ -35,5 +40,3 @@ const AdminFeedback = () => {
 };
 
 export default AdminFeedback;
-
-

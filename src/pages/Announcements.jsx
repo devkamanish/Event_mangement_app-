@@ -1,7 +1,9 @@
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startListeningAnnouncements, stopListeningAnnouncements } from "../features/announcements/announcementSlice";
+import {
+  startListeningAnnouncements,
+  stopListeningAnnouncements,
+} from "../features/announcements/announcementSlice";
 
 const Announcements = () => {
   const dispatch = useDispatch();
@@ -19,7 +21,9 @@ const Announcements = () => {
         {list.map((a) => (
           <li key={a.id} className="bg-yellow-100 p-4 rounded shadow">
             <p className="text-gray-800">{a.message}</p>
-            <p className="text-xs text-gray-500">{new Date(a.timestamp.seconds * 1000).toLocaleString()}</p>
+            <p className="text-xs text-gray-500">
+              {new Date(a.timestamp.seconds * 1000).toLocaleString()}
+            </p>
           </li>
         ))}
       </ul>

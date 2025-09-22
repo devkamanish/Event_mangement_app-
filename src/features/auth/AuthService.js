@@ -17,7 +17,6 @@ export async function registerUser({ name, email, password, ticket }) {
     password
   );
 
-  // Update display name
   await updateProfile(userCredential.user, { displayName: name });
 
   await setDoc(doc(db, "attendees", userCredential.user.uid), {

@@ -1,7 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMessages, sendMessage } from "../features/networking/networkingSlice";
+import {
+  fetchMessages,
+  sendMessage,
+} from "../features/networking/networkingSlice";
 import { useSelector as useAuthSelector } from "react-redux";
 
 const Networking = () => {

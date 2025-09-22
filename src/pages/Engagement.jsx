@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSurvey, fetchSurveys, addContent, fetchContent } from "../features/engagement/engagementSlice";
+import {
+  addSurvey,
+  fetchSurveys,
+  addContent,
+  fetchContent,
+} from "../features/engagement/engagementSlice";
 
 export default function Engagement() {
   const dispatch = useDispatch();
@@ -26,7 +31,13 @@ export default function Engagement() {
   const handleContentSubmit = (e) => {
     e.preventDefault();
     if (contentTitle && contentLink) {
-      dispatch(addContent({ title: contentTitle, link: contentLink, date: new Date().toISOString() }));
+      dispatch(
+        addContent({
+          title: contentTitle,
+          link: contentLink,
+          date: new Date().toISOString(),
+        })
+      );
       setContentTitle("");
       setContentLink("");
     }
@@ -34,7 +45,9 @@ export default function Engagement() {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">🌐 Post-Event Community Engagement</h2>
+      <h2 className="text-2xl font-bold mb-6">
+        🌐 Post-Event Community Engagement
+      </h2>
 
       {/* Add Survey */}
       <div className="bg-white p-4 rounded shadow mb-6">
@@ -47,7 +60,9 @@ export default function Engagement() {
             onChange={(e) => setSurveyText(e.target.value)}
             className="border p-2 rounded flex-1"
           />
-          <button type="submit" className="bg-blue-500 text-white px-4 rounded">Add</button>
+          <button type="submit" className="bg-blue-500 text-white px-4 rounded">
+            Add
+          </button>
         </form>
         <ul className="mt-4 list-disc pl-6">
           {surveys.map((s) => (
@@ -74,12 +89,22 @@ export default function Engagement() {
             onChange={(e) => setContentLink(e.target.value)}
             className="border p-2 rounded flex-1"
           />
-          <button type="submit" className="bg-green-500 text-white px-4 rounded">Share</button>
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-4 rounded"
+          >
+            Share
+          </button>
         </form>
         <ul className="list-disc pl-6">
           {content.map((c) => (
             <li key={c.id}>
-              <a href={c.link} target="_blank" rel="noreferrer" className="text-blue-600 underline">
+              <a
+                href={c.link}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 underline"
+              >
                 {c.title}
               </a>
             </li>

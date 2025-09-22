@@ -1,7 +1,6 @@
-// src/pages/Login.jsx
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "../features/auth/authSlice"; // ⬅️ use the thunk
+import { signin } from "../features/auth/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import SplitText from "../styles/SplitText ";
 
@@ -22,7 +21,6 @@ const Login = () => {
     dispatch(signin({ email, password }));
   };
 
-  // ⬅️ Redirect once user is logged in
   useEffect(() => {
     if (user) {
       navigate("/dashboard");

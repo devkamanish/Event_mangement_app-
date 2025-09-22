@@ -1,4 +1,3 @@
-// src/pages/AddTicket.jsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTicket } from "../features/tickets/ticketsSlice";
@@ -13,13 +12,18 @@ export default function AddTicket() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(createTicket({ type, price: Number(price), limit: Number(limit) }));
+    await dispatch(
+      createTicket({ type, price: Number(price), limit: Number(limit) })
+    );
     navigate("/tickets");
   };
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-900 text-white">
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-800 p-8 rounded-xl shadow-lg w-96"
+      >
         <h2 className="text-2xl mb-4 font-bold">Add Ticket</h2>
         <input
           type="text"
@@ -45,7 +49,10 @@ export default function AddTicket() {
           onChange={(e) => setLimit(e.target.value)}
           required
         />
-        <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded font-semibold"
+        >
           Create Ticket
         </button>
       </form>

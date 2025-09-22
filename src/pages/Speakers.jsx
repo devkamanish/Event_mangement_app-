@@ -1,4 +1,3 @@
-// src/pages/Speakers.jsx
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpeakers } from "../features/speakers/speakersSlice";

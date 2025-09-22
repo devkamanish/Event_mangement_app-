@@ -15,7 +15,6 @@ import {
 } from "chart.js";
 import { Bar, Pie } from "react-chartjs-2";
 
-// Register chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -41,7 +40,9 @@ const Analytics = () => {
     datasets: [
       {
         label: "Attendees",
-        data: events.map((evt) => evt.attendeesCount || Math.floor(Math.random() * 100)),
+        data: events.map(
+          (evt) => evt.attendeesCount || Math.floor(Math.random() * 100)
+        ),
         backgroundColor: "#8884d8",
       },
     ],
@@ -53,13 +54,21 @@ const Analytics = () => {
       {
         label: "Average Rating",
         data: events.map((evt) => {
-          const eventFeedback = feedbacks.filter((f) => f.session === evt.title);
+          const eventFeedback = feedbacks.filter(
+            (f) => f.session === evt.title
+          );
           const avgRating =
             eventFeedback.reduce((acc, cur) => acc + Number(cur.rating), 0) /
             (eventFeedback.length || 1);
           return parseFloat(avgRating.toFixed(1));
         }),
-        backgroundColor: ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AA336A"],
+        backgroundColor: [
+          "#0088FE",
+          "#00C49F",
+          "#FFBB28",
+          "#FF8042",
+          "#AA336A",
+        ],
       },
     ],
   };
@@ -72,13 +81,27 @@ const Analytics = () => {
         {/* Attendance Bar Chart */}
         <div className="bg-white p-6 rounded shadow">
           <h3 className="text-xl font-semibold mb-4">Session Attendance</h3>
-          <Bar data={attendanceData} options={{ responsive: true, plugins: { legend: { position: "top" } } }} />
+          <Bar
+            data={attendanceData}
+            options={{
+              responsive: true,
+              plugins: { legend: { position: "top" } },
+            }}
+          />
         </div>
 
         {/* Feedback Pie Chart */}
         <div className="bg-white p-6 rounded shadow">
-          <h3 className="text-xl font-semibold mb-4">Average Feedback Rating</h3>
-          <Pie data={feedbackData} options={{ responsive: true, plugins: { legend: { position: "right" } } }} />
+          <h3 className="text-xl font-semibold mb-4">
+            Average Feedback Rating
+          </h3>
+          <Pie
+            data={feedbackData}
+            options={{
+              responsive: true,
+              plugins: { legend: { position: "right" } },
+            }}
+          />
         </div>
       </div>
     </div>
