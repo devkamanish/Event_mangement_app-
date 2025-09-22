@@ -43,7 +43,8 @@ const Analytics = () => {
         data: events.map(
           (evt) => evt.attendeesCount || Math.floor(Math.random() * 100)
         ),
-        backgroundColor: "#8884d8",
+        backgroundColor: "rgba(136, 132, 216, 0.8)",
+        borderRadius: 6,
       },
     ],
   };
@@ -69,37 +70,64 @@ const Analytics = () => {
           "#FF8042",
           "#AA336A",
         ],
+        borderWidth: 2,
       },
     ],
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Event Analytics Dashboard</h2>
+    <div className="p-8 bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 min-h-screen">
+      <h2 className="text-3xl font-extrabold mb-8 text-center text-purple-700 animate-pulse">
+        Event Analytics Dashboard
+      </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Attendance Bar Chart */}
-        <div className="bg-white p-6 rounded shadow">
-          <h3 className="text-xl font-semibold mb-4">Session Attendance</h3>
+        <div className="bg-white rounded-2xl shadow-2xl p-6 transform transition-transform duration-500 hover:scale-105 hover:shadow-purple-300">
+          <h3 className="text-xl font-semibold mb-4 text-purple-600">
+            Session Attendance
+          </h3>
           <Bar
             data={attendanceData}
             options={{
               responsive: true,
-              plugins: { legend: { position: "top" } },
+              plugins: {
+                legend: { position: "top" },
+                tooltip: { enabled: true, mode: "index" },
+              },
+              animation: {
+                duration: 1200,
+                easing: "easeOutQuart",
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: "#5B21B6", font: { weight: "bold" } },
+                },
+                x: {
+                  ticks: { color: "#5B21B6", font: { weight: "bold" } },
+                },
+              },
             }}
           />
         </div>
 
-        {/* Feedback Pie Chart */}
-        <div className="bg-white p-6 rounded shadow">
-          <h3 className="text-xl font-semibold mb-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 transform transition-transform duration-500 hover:scale-105 hover:shadow-pink-300">
+          <h3 className="text-xl font-semibold mb-4 text-pink-600">
             Average Feedback Rating
           </h3>
           <Pie
             data={feedbackData}
             options={{
               responsive: true,
-              plugins: { legend: { position: "right" } },
+              plugins: {
+                legend: { position: "right", labels: { boxWidth: 20 } },
+                tooltip: { enabled: true, mode: "nearest" },
+              },
+              animation: {
+                animateScale: true,
+                animateRotate: true,
+                duration: 1200,
+              },
             }}
           />
         </div>

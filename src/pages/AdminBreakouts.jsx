@@ -18,32 +18,37 @@ const AdminBreakouts = () => {
   };
 
   return (
-    <div className="p-8 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Create Breakout Session</h2>
-      <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="p-8 max-w-md mx-auto bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 rounded-2xl shadow-2xl min-h-screen">
+      <h2 className="text-3xl font-extrabold mb-6 text-center text-purple-700 animate-pulse">
+        Create Breakout Session
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
         <input
           type="text"
           placeholder="Session Topic"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 shadow-inner placeholder-purple-300"
         />
         <input
           type="text"
           placeholder="Moderator Name"
           value={moderator}
           onChange={(e) => setModerator(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 shadow-inner placeholder-purple-300"
         />
         <input
           type="text"
           placeholder="Time (e.g. 3:00 PM)"
           value={time}
           onChange={(e) => setTime(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 shadow-inner placeholder-purple-300"
         />
-        <button className="bg-green-600 text-white px-4 py-2 rounded">
-          Add
+        <button
+          type="submit"
+          className="w-full py-3 text-white font-bold rounded-2xl shadow-lg transform transition-transform duration-300 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:scale-105"
+        >
+          Add Session
         </button>
       </form>
     </div>

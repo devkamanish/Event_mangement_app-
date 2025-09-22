@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import "./App.css";
 import Register from "./pages/Register";
-import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
@@ -16,7 +15,6 @@ import Speakers from "./pages/Speakers";
 import AdminSpeakers from "./pages/AdminSpeakers";
 import Networking from "./pages/Networking";
 import FeedbackForm from "./pages/FeedbackForm";
-import AdminFeedback from "./pages/AdminFeedback";
 import Analytics from "./pages/Analytics";
 import Breakouts from "./pages/Breakouts";
 import AdminBreakouts from "./pages/AdminBreakouts";
@@ -54,7 +52,6 @@ function App() {
           <Route path="/admin/speakers" element={<AdminSpeakers />} />
           <Route path="/networking" element={<Networking />} />
           <Route path="/feedback" element={<FeedbackForm />} />
-          <Route path="/admin/feedback" element={<AdminFeedback />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/breakouts" element={<Breakouts />} />
           <Route path="/admin/breakouts" element={<AdminBreakouts />} />

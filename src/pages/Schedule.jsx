@@ -18,23 +18,38 @@ const Schedule = () => {
   };
 
   if (status === "loading")
-    return <p className="text-center mt-8">Loading sessions...</p>;
+    return <p className="text-center mt-8 animate-pulse text-gray-500">⏳ Loading sessions...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Event Schedule</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sessions.map((session) => (
-          <div key={session.id} className="bg-white shadow-md rounded-xl p-4">
-            <h3 className="text-xl font-semibold">{session.title}</h3>
+    <div className="p-8 min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+      <h2 className="text-3xl font-extrabold mb-8 text-center bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent drop-shadow-sm">
+        📅 Event Schedule
+      </h2>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sessions.map((session, index) => (
+          <div
+            key={session.id}
+            className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl p-6 border border-gray-200 
+                       transform transition-all duration-300 ease-in-out hover:-translate-y-2 
+                       hover:shadow-xl hover:border-indigo-400 animate-fadeIn"
+            style={{ animationDelay: `${index * 0.1}s` }} 
+          >
+            <h3 className="text-xl font-bold text-gray-800">{session.title}</h3>
             <p className="text-gray-600">{session.speaker}</p>
             <p className="text-gray-500 text-sm">{session.time}</p>
+
             <button
               onClick={() => handleBookmark(session.id)}
-              className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className={`mt-4 px-5 py-2 rounded-xl font-medium shadow-md transition-all duration-300 
+                ${
+                  session.bookmarked
+                    ? "bg-green-500 hover:bg-green-600 text-white scale-105"
+                    : "bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white"
+                }`}
             >
-              {session.bookmarked ? "Bookmarked ✅" : "Bookmark"}
+              {session.bookmarked ? "✅ Bookmarked" : "🔖 Bookmark"}
             </button>
           </div>
         ))}

@@ -24,26 +24,28 @@ const FeedbackForm = () => {
   };
 
   return (
-    <div className="p-8 max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Submit Feedback</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="p-8 max-w-lg mx-auto bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 rounded-xl shadow-2xl transform transition-transform duration-500 hover:scale-105">
+      <h2 className="text-3xl font-extrabold mb-6 text-purple-700 text-center animate-pulse">
+        Submit Feedback
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
         <input
           type="text"
           name="session"
           placeholder="Session Name"
           value={form.session}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 shadow-inner placeholder-purple-300"
           required
         />
 
-        <label className="block">
+        <label className="block text-purple-600 font-medium">
           Rating:
           <select
             name="rating"
             value={form.rating}
             onChange={handleChange}
-            className="ml-2 p-1 border rounded"
+            className="ml-3 p-2 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 shadow-inner cursor-pointer"
           >
             {[1, 2, 3, 4, 5].map((num) => (
               <option key={num} value={num}>
@@ -58,12 +60,12 @@ const FeedbackForm = () => {
           placeholder="Your comments..."
           value={form.comments}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 shadow-inner placeholder-purple-300 resize-none h-32"
         />
 
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded"
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 rounded-xl shadow-lg hover:scale-105 hover:from-pink-500 hover:to-purple-500 transition-all duration-300 transform"
         >
           Submit Feedback
         </button>
